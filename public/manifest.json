@@ -1,0 +1,10 @@
+{
+  "id": "poe-llm-provider",
+  "name": "Poe",
+  "version": "1.0.0",
+  "description": "A DeskAI plugin that can integrate Poe.",
+  "author": "DeskAI",
+  "authorUrl": "https://deskai.app",
+  "fundingUrl": "https://deskai.app/pricing",
+  "worker": "index.js"
+}

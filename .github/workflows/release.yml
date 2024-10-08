@@ -1,0 +1,55 @@
+name: Build and Release
+
+permissions:
+  contents: write
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    environment: release
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build project
+        run: npm run build
+
+      - name: Create ZIP archive
+        run: |
+          mv dist ${{ github.event.repository.name }}-${{ github.ref_name }}
+          zip -r ${{ github.event.repository.name }}-${{ github.ref_name }}.zip ${{ github.event.repository.name }}-${{ github.ref_name }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./${{ github.event.repository.name }}-${{ github.ref_name }}.zip
+          asset_name: ${{ github.event.repository.name }}-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
