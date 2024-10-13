@@ -53,7 +53,7 @@ export default class {
         commonHeaders.append("Authorization", `Bearer ${config.apiKey}`);
       },
       setConfig: (key, value) => {
-        if (key === "Authorization") {
+        if (key === "apiKey") {
           commonHeaders.delete("Authorization");
           commonHeaders.append("Authorization", `Bearer ${value}`);
           return;
