@@ -4,6 +4,7 @@
   "version": "1.0.1",
   "description": "A DeskAI plugin that can integrate Poe.",
   "author": "DeskAI",
+  "icon": "dist/icon.svg",
   "authorUrl": "https://deskai.app",
   "fundingUrl": "https://deskai.app/pricing",
   "worker": "dist/index.js"
