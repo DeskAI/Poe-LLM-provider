@@ -1,7 +1,7 @@
 {
   "id": "poe-llm-provider",
   "name": "Poe LLM Provider",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A DeskAI plugin that can integrate Poe.",
   "author": "DeskAI",
   "icon": "dist/icon.svg",
